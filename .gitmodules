@@ -1,0 +1,9 @@
+[submodule "pico-sdk"]
+	path = include/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk.git
+[submodule "gifdec"]
+	path = include/gifdec
+	url = https://github.com/lecram/gifdec.git
+[submodule "PicoLed"]
+	path = include/PicoLed
+	url = https://github.com/ForsakenNGS/PicoLED.git
