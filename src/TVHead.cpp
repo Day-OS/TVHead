@@ -1,25 +1,37 @@
+
 #include "pico/stdlib.h"
-#include "iostream"
 #include "PicoLed.hpp"
 #include "data.c"
 #include "gifdec/gifdec.h"
-
-
+#include "string.h"
 #define LED_LENGTH 21
-  
+
+
 int main() {
     stdio_init_all();
-
-    
     const uint LED_PIN = PICO_DEFAULT_LED_PIN;
-    const uint BUZZER = 21;
     gpio_init(LED_PIN);
-    gpio_init(BUZZER);
-    gpio_set_function(BUZZER, GPIO_FUNC_PWM);
-
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
-     PicoLed::PicoLedController ledStrip = PicoLed::addLeds<PicoLed::WS2812B>(pio0, 0, 0, LED_LENGTH, PicoLed::FORMAT_RGB);
+
+    while (true) {
+        printf("seeeeeeeeeeeeeeeekkusu\n");
+        printf("canvas size: %ux%u\n", gif->width, gif->height);
+        printf("number of colors: %d\n", gif->palette->size);
+        //printf(strcat((char*) onepixelheight_gif, (char*)"\n"));
+        sleep_ms(1000);
+    }
+    return 0;
+}
+
+
+/*
+
+
+  
+int main() {
+
+    PicoLed::PicoLedController ledStrip = PicoLed::addLeds<PicoLed::WS2812B>(pio0, 0, 0, LED_LENGTH, PicoLed::FORMAT_RGB);
     //ledStrip.setPixelColor(0, PicoLed::Color(2))
     ledStrip.setBrightness(64);
     //ledStrip.fill( PicoLed::RGB(255, 0, 0) );
@@ -28,7 +40,7 @@ int main() {
     try
     {
         
-        gd_GIF *gif = gd_open_gif((char*) onepixelheight_gif);
+        
         uint8_t *buffer;
         gd_render_frame(gif, buffer);  
         gd_get_frame(gif);
@@ -51,7 +63,7 @@ int main() {
         while (true){
             //printf(e);
             sleep_ms(100);
-            gpio_put(LED_PIN, 1);
+            
             sleep_ms(200);
             gpio_put(LED_PIN, 0);
         }
@@ -66,3 +78,4 @@ int main() {
  
     printf("AAAAAAAAAAAAAAAAAAAAAAAA\n");
 }
+*/
