@@ -63,7 +63,15 @@
       "streambuf": "cpp",
       "cinttypes": "cpp",
       "typeinfo": "cpp",
-      "data.c": "cpp"
+      "data.c": "cpp",
+      "complex": "cpp",
+      "cstring": "cpp",
+      "ctime": "cpp",
+      "list": "cpp",
+      "set": "cpp",
+      "fstream": "cpp",
+      "iomanip": "cpp",
+      "sstream": "cpp"
     },
     "C_Cpp.dimInactiveRegions": true,
 }

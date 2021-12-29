@@ -45,7 +45,7 @@ set(PICO_CXX_ENABLE_RTTI 1)
 pico_sdk_init()
 
 include("include/PicoLed/PicoLed.cmake")
-add_subdirectory(include/gifdec)
+add_subdirectory(include/VTNCRW)
 # Add executable. Default name is the project name, version 0.1
 
 add_executable(TVHead src/TVHead.cpp)
@@ -64,7 +64,7 @@ pico_enable_stdio_uart(TVHead 0)
 pico_enable_stdio_usb(TVHead 1)
 
 # Add the standard library to the build
-target_link_libraries(TVHead pico_stdlib PicoLed GIFDec)
+target_link_libraries(TVHead pico_stdlib PicoLed VTNCRW)
 
 # Add any user requested libraries
 target_link_libraries(TVHead
@@ -79,4 +79,3 @@ target_link_libraries(TVHead
         )
 
 pico_add_extra_outputs(TVHead)
-
