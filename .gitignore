@@ -34,3 +34,4 @@
 *.out
 *.app
 include/libvips/
+src/data.c

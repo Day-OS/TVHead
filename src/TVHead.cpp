@@ -1,16 +1,18 @@
 #include "pico/stdlib.h"
 #include "PicoLed.hpp"
-#include "data.c"
 #include "string.h"
 #include "iostream"
 #include "VTNCRW/src/vtncrw.h"
+
+//REMINDER: "data.c" is generated when CMake gets all the folders from asset and transforms it into an char array!
+#include "data.c"
 
 #define width 17
 #define height 11
 
 int main() {
     VTNCRW VTNCLib;
-    std::vector<unsigned char> fileToBeLoaded(amogus_vtnc, amogus_vtnc + amogus_vtnc_size);
+    std::vector<unsigned char> fileToBeLoaded(totallynotamongus_vtnc, totallynotamongus_vtnc + totallynotamongus_vtnc_size);
     VTNCFile file = VTNCLib.read(fileToBeLoaded);
 
     stdio_init_all();
@@ -45,18 +47,6 @@ int main() {
         ledStrip.show();
         sleep_ms(file.Layers[0].framesArray[frame].msDuration);
         }
-        
-
-        // std::cout << std::endl << "FILE: Is .VTNC? R: " << std::boolalpha <<  file.isFile;
-        // std::cout << std::endl << "FILE: Layers Quantity: " << int(file.layersQuantity);
-        // //std::cout << std::endl << "FILE: Layer Keys: " << int(file.Layers[0].layerKey);
-        // std::cout << std::endl << "FILE: Layers Resolution: "<< std::dec << file.layersResolution[0].x << "x" << file.layersResolution[0].y;
-        // std::cout << std::endl << "FILE: Colors Quantity: " << int(file.colorsQuantity);
-        // std::cout << std::endl << "FILE: Colors: " << std::hex << int(file.Colors[1].R) << "|" << int(file.Colors[1].G) << "|" << int(file.Colors[1].B);
-        // std::cout << std::endl << "FILE: Frames Quantity: " << int(file.framesQuantity);
-        // std::cout << std::endl << "FILE: Frames Array: " << int(file.Layers->framesArray->Pixels[0]);
-        
-        //sleep_ms(1000);
     }
     return 0;
 }
