@@ -4,7 +4,7 @@
 #include "iostream"
 #include "VTNCRW/src/vtncrw.h"
 
-//REMINDER: "data.c" is generated when CMake gets all the folders from asset and transforms it into an char array!
+//REMINDER: "data.c" is generated when CMake gets all the files from "assets" directory and transforms it into a char array!
 #include "data.c"
 
 #define width 17
