@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": -76.8, "left": 43.24, "attrs": {} },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip1",
+      "top": -74.7,
+      "left": 182.4,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip2",
+      "top": -123.5,
+      "left": 178.6,
+      "rotate": 180,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip3",
+      "top": -170.7,
+      "left": 182.4,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip4",
+      "top": -219.5,
+      "left": 178.6,
+      "rotate": 180,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip5",
+      "top": -266.7,
+      "left": 182.4,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip6",
+      "top": -315.5,
+      "left": 178.6,
+      "rotate": 180,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip7",
+      "top": -362.7,
+      "left": 182.4,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip8",
+      "top": -411.5,
+      "left": 178.6,
+      "rotate": 180,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-led-strip",
+      "id": "strip9",
+      "top": -468.3,
+      "left": 182.4,
+      "attrs": { "pixels": "17" }
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "imu1",
+      "top": 31.78,
+      "left": 166.12,
+      "rotate": 270,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.2", "strip1:VSS", "black", [ "v0" ] ],
+    [ "strip1:VDD.2", "strip2:VDD", "green", [ "v0" ] ],
+    [ "strip1:DOUT", "strip2:DIN", "green", [ "h5.8", "v-67.2" ] ],
+    [ "strip1:VSS.2", "strip2:VSS", "green", [ "h15.4", "v-87.2" ] ],
+    [ "strip3:VDD.2", "strip4:VDD", "green", [ "v0" ] ],
+    [ "strip3:DOUT", "strip4:DIN", "green", [ "h5.8", "v-67.2" ] ],
+    [ "strip3:VSS.2", "strip4:VSS", "green", [ "h15.4", "v-87.2" ] ],
+    [ "strip2:DOUT", "strip3:DIN", "green", [ "h-9.6", "v-48.8" ] ],
+    [ "strip2:VDD.2", "strip3:VDD", "green", [ "h-19.2", "v-68.8" ] ],
+    [ "strip5:VDD.2", "strip6:VDD", "green", [ "v0" ] ],
+    [ "strip5:DOUT", "strip6:DIN", "green", [ "h5.8", "v-67.2" ] ],
+    [ "strip5:VSS.2", "strip6:VSS", "green", [ "h15.4", "v-87.2" ] ],
+    [ "strip7:VDD.2", "strip8:VDD", "green", [ "v0" ] ],
+    [ "strip7:DOUT", "strip8:DIN", "green", [ "h5.8", "v-67.2" ] ],
+    [ "strip7:VSS.2", "strip8:VSS", "green", [ "h15.4", "v-87.2" ] ],
+    [ "strip6:VSS.2", "strip7:VSS", "green", [ "h0" ] ],
+    [ "strip6:DOUT", "strip7:DIN", "green", [ "h-9.6", "v-48.8" ] ],
+    [ "strip6:VDD.2", "strip7:VDD", "green", [ "h-19.2", "v-68.8" ] ],
+    [ "strip8:VSS.2", "strip9:VSS", "green", [ "h-5.8", "v-36.8" ] ],
+    [ "strip8:DOUT", "strip9:DIN", "green", [ "h-15.4", "v-56.8" ] ],
+    [ "strip8:VDD.2", "strip9:VDD", "green", [ "h-25", "v-76.8" ] ],
+    [ "strip2:VSS.2", "strip3:VSS", "green", [ "h-5.8", "v-27.2" ] ],
+    [ "strip4:VSS.2", "strip5:VSS", "green", [ "h-5.8", "v-27.2" ] ],
+    [ "strip4:DOUT", "strip5:DIN", "green", [ "h-15.4", "v-47.2" ] ],
+    [ "strip4:VDD.2", "strip5:VDD", "green", [ "h-25", "v-67.2" ] ],
+    [ "imu1:VCC", "esp:3V3", "red", [ "v-86.48", "h-153.75" ] ],
+    [ "imu1:GND", "esp:GND.2", "black", [ "h9.6", "v-48.08", "v-38.4" ] ],
+    [ "esp:22", "imu1:SCL", "green", [ "h28.8", "v76.88" ] ],
+    [ "esp:21", "imu1:SDA", "green", [ "h9.6", "v57.68" ] ],
+    [ "esp:5V", "strip1:VDD", "red", [ "h-19.05", "v-201.6", "h153.6" ] ],
+    [ "esp:33", "strip1:DIN", "green", [ "h-9.45", "v-86.4", "h134.4" ] ]
+  ],
+  "dependencies": {}
+}
