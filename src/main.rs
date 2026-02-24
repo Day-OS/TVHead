@@ -27,21 +27,23 @@
 #![no_std]
 #![no_main]
 
-use embedded_graphics::{Pixel, image::{ImageDrawable, ImageDrawableExt}, pixelcolor::Rgb565, prelude::{Point, Size}, primitives::Rectangle};
+use embedded_graphics::{image::{ImageDrawable}, pixelcolor::Rgb888};
 use esp_backtrace as _;
 use esp_hal::{delay::Delay, rmt::Rmt, time::Rate};
-use esp_hal_smartled::{RmtSmartLeds, Ws2812Timing, buffer_size, color_order};
-use esp_println::println;
+use esp_hal_smartled::{RmtSmartLeds, Ws2812bTiming, buffer_size, color_order};
 use smart_leds::{
     RGB8, SmartLedsWrite, brightness, gamma,
-    hsv::{Hsv, hsv2rgb},
 };
 
-use crate::screen::PixelCollector;
+
+use crate::screen::WsScreen;
 mod screen;
 esp_bootloader_esp_idf::esp_app_desc!();
 
-const LEDS: usize = 153;
+
+const WIDTH: u32 = 17;
+const HEIGHT: u32 = 9;
+const LEDS: usize = (WIDTH * HEIGHT) as usize;
 
 #[esp_hal::main]
 fn main() -> ! {
@@ -53,51 +55,39 @@ fn main() -> ! {
 
     // Configure RMT peripheral globally
     let freq = Rate::from_mhz(80);
-    type LedColor = RGB8;
-    let mut led = {
+    let mut led: RmtSmartLeds<'_, _, esp_hal::Blocking, smart_leds::RGB<u8>, color_order::Rgb, Ws2812bTiming> = {
         let rmt = Rmt::new(peripherals.RMT, freq).expect("Failed to initialize RMT0");
         // Configure color order and timing implementation as needed.
-        RmtSmartLeds::<{ buffer_size::<LedColor>(LEDS) }, _, LedColor, color_order::Rgb, Ws2812Timing>::new_with_memsize(
+        RmtSmartLeds::<{ buffer_size::<RGB8>(LEDS) }, _, RGB8, color_order::Rgb, Ws2812bTiming>::new_with_memsize(
             rmt.channel0,
             led_pin,
-            4,
+            3,
         ).unwrap()
     };
     let delay = Delay::new();
 
-    let image = tinygif::Gif::<Rgb565>::from_slice(include_bytes!("../content/smile.gif")).unwrap();
+    let image = tinygif::Gif::<Rgb888>::from_slice(include_bytes!("../content/smile.gif")).unwrap();
 
-    let mut color = Hsv {
-        hue: 0,
-        sat: 255,
-        val: 255,
-    };
-    let mut buf: [Pixel<Rgb565>; LEDS] = [Pixel::default(); LEDS]; // ajuste pro seu caso
-    let mut collector = PixelCollector::new(&mut buf);
-    let frames = image.frames();
-    for frame in image.frames(){
-        frame.draw(&mut collector).unwrap();
-    }
-    for pixel in collector.pixels {
-        println!("{pixel:?}")
-    }
-    let mut data: [smart_leds::RGB<u8>; LEDS] = [Default::default(); LEDS];
+    let mut buf: [smart_leds::RGB<u8>; LEDS] = [Default::default(); LEDS]; // ajuste pro seu caso
+    let mut screen = WsScreen::new(
+        &mut buf,
+        WIDTH,
+        HEIGHT,
+        Some(true),  // zigzag
+        Some(true), // invert_v
+        Some(false), // invert_h
+    );
 
     loop {
-        // Iterate over the rainbow!
-        for hue in 0..=255 {
-            color.hue = hue;
-            // Convert from the HSV color space (where we can easily transition from one
-            // color to the other) to the RGB color space that we can then send to the LED
-            for i in 0..LEDS{
-                data[i] = hsv2rgb(color); 
-            }
-            // When sending to the LED, we do a gamma correction first (see smart_leds
-            // documentation for details) and then limit the brightness to 10 out of 255 so
-            // that the output it's not too bright.
-            led.write(brightness(gamma(data.iter().cloned()), 255))
+        for frame in image.frames() {
+
+            frame.draw(&mut screen).unwrap();
+
+            let delay_ms = frame.delay_centis * 10;
+            
+            led.write(brightness(gamma(screen.buffer.iter().cloned()), 255))
                 .unwrap();
-            delay.delay_millis(20);
+            delay.delay_millis(delay_ms as u32);           
         }
     }
 }

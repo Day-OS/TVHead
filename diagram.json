@@ -9,7 +9,7 @@
       "id": "strip1",
       "top": -74.7,
       "left": 211.2,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
@@ -17,14 +17,14 @@
       "top": -113.9,
       "left": 207.4,
       "rotate": 180,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
       "id": "strip3",
       "top": -151.5,
       "left": 211.2,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
@@ -32,14 +32,14 @@
       "top": -190.7,
       "left": 207.4,
       "rotate": 180,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
       "id": "strip5",
       "top": -228.3,
       "left": 211.2,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
@@ -47,14 +47,14 @@
       "top": -267.5,
       "left": 207.4,
       "rotate": 180,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
       "id": "strip7",
       "top": -305.1,
       "left": 211.2,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
@@ -62,14 +62,14 @@
       "top": -334.7,
       "left": 207.4,
       "rotate": 180,
-      "attrs": { "pixels": "17" }
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-led-strip",
       "id": "strip9",
       "top": -372.3,
-      "left": 201.6,
-      "attrs": { "pixels": "17" }
+      "left": 211.2,
+      "attrs": { "pixels": "17", "pixelShape": "square" }
     },
     {
       "type": "wokwi-mpu6050",
